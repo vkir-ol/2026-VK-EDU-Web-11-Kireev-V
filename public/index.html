@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Новые вопросы - AskPupkin</title>
+        <link rel="icon" type="image/svg+xml" href="static/img/icon1.svg">
+        <link rel="icon" type="image/png" href="static/img/icon1.png">
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/style.css">
+    </head>
+    <body class = "d-flex flex-column min-vh-100">
+
+        <!-- Шапка  -->
+         <header class = "pk-header py-3">
+            <div class = "container">
+                <div class = "row align-items-center g-3">
+
+                    <div class = "col-auto">
+                        <a class = "pk-logo" href="index.html">AskPupkin</a>
+                    </div>
+
+                    <div class = "col-12 col-md order-3 order-md-2">
+                        <form class="d-flex" role="search">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        </form>                    
+                    </div>
+
+
+                    <div class="col-auto order-2 order-md-3">
+                        <a class ="btn btn-ask" href="ask.html">Ask!</a>
+                    </div>
+
+                    <!-- Пользовательские ссылки -->
+                    <div class="col-auto ms-auto order-2 order-md-4">
+                        <a href="login.html">log in</a>
+                        <a class="ms-2" href="signup.html">register</a>
+                    </div>
+
+                    
+                    <div class="col-auto ms-auto order-2 order-md-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <img class="pk-avatar" src="static/img/avatar-1.png" alt="Аватар Mr. Parker" width="40" height="40">
+                            <div class="lh-sm">
+                                <div class="pk-user-name">Mr. Parker</div>
+                                <a class="small" href="profile.html">settings</a>
+                                <a class="small ms-2" href="login.html">log out</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+         </header>
+
+
+        <!-- Основной контент -->
+        <main class="container my-4 flex-grow-1">
+            <div class="row g-4">
+
+
+                <section class="col-12 col-lg-8">
+
+                    <div class="d-flex flex-wrap align-items-baseline gap-3 mb-3">
+                        <h1 class="h3 mb-0">New Questions</h1>
+                        <a href="index.html">Hot Questions</a>
+                    </div>
+
+                    <!-- карточка вопроса -->
+                    <article class="pk-card p-3 mb-3">
+                        <div class="d-flex gap-3">
+
+                            <div class="flex-shrink-0 text-center">
+                                <img class="pk-avatar" src="static/img/avatar-1.png" alt="Аватар автора" width="64" height="64">
+                            </div>
+
+                            <div class="flex-grow-1 pk-card-body">
+                                <h2 class="h5 mb-1">
+                                    <a class="pk-q-title" href="question.html">How to build a moon park?</a>
+                                </h2>
+                                <p class="mb-2">Guys, I have trouble with a moon park. Can't find the black-jack...</p>
+
+                                <div class="d-flex flex-wrap align-items-center gap-2 small">
+                                    <a href="question.html">answers (3)</a>
+                                    <span class="text-muted">Tags:</span>
+                                    <a class="pk-tag" href="index.html">black-jack</a>
+                                    <a class="pk-tag" href="index.html">bender</a>
+                                    <time class="text-muted ms-auto" datetime="2026-10-23T21:00">2 hours ago</time>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                </section>
+
+
+                <aside class="col-12 col-lg-4">
+                    <section class="mb-4">
+                        <h2 class="pk-side-title">Popular Tags</h2>
+                        <a href="index.html">perl</a>
+                        <a href="index.html">python</a>
+                        <a href="index.html">MySQL</a>
+                        <a href="index.html">django</a>
+                    </section>
+
+                    <section>
+                        <h2 class="pk-side-title">Best Members</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="profile.html">Mr. Oleg</a></li>
+                            <li><a href="profile.html">Mr. Mentalist</a></li>
+                            <li><a href="profile.html">Gogy</a></li>
+                        </ul>
+                    </section>
+                </aside>
+            </div>
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="pk-footer py-3 text-center">
+            <div class="container"> 2026 AskPupkin</div>
+        </footer>
+
+
+        <script src="static/js/bootstrap.bundle.min.js"></script>
+        
+    </body>
+</html>
