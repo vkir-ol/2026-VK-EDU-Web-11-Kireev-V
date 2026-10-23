@@ -1,0 +1,70 @@
+:root {
+    --pk-bg: #fbf8f2;
+    --pk-ink: #1f2a37;
+    --pk-muted: #6b7280;
+    --pk-accent: #16a34a;
+    --pk-accent-dark: #15803d;
+    --pk-line: #e5dfd3;
+    --pk-card: #ffffff;
+}
+
+body {
+    background-color: var(--pk-bg);
+    color: var(--pk-ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+
+}
+
+a {
+    color: #1d4ed8;
+}
+
+
+/* Шапка */
+.pk-header {
+    background: var(--pk-card);
+    border-bottom: 1px solid var(--pk-line);
+}
+
+.pk-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing : -0.02em;
+    color: var(--pk-ink);
+    text-decoration: none;
+}
+
+.pk-logo:hover {
+    color: var(--pk-accent-dark);
+}
+
+
+.btn-ask {
+    background: var(--pk-accent);
+    border-color: var(--pk-accent);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.btn-ask:hover {
+    background: var(--pk-accent-dark);
+    border-color: var(--pk-accent-dark);
+    color: #fff;
+}
+
+
+/* сайдбар */
+.pk-side-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+
+/* футэр */
+.pk-footer {
+    border-top: 1px solid var(--pk-line);
+    background: var(--pk-card);
+    color: var(--pk-muted);
+}
