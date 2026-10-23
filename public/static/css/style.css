@@ -68,3 +68,16 @@ a {
     background: var(--pk-card);
     color: var(--pk-muted);
 }
+
+
+/* Юзерблок */
+.pk-avatar {
+    border-radius: 50%;
+    object-fit: cover;                  /* Без искажения */
+    border: 2px solid var(--pk-line);
+}
+
+.pk-user-name {
+    font-weight: 600;
+    color: var(--pk-ink);
+}
