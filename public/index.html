@@ -7,6 +7,7 @@
         <link rel="icon" type="image/svg+xml" href="static/img/icon1.svg">
         <link rel="icon" type="image/png" href="static/img/icon1.png">
         <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/material-symbols.css">
         <link rel="stylesheet" href="static/css/style.css">
     </head>
     <body class = "d-flex flex-column min-vh-100">
@@ -68,30 +69,97 @@
                     </div>
 
                     <!-- карточка вопроса -->
-                    <article class="pk-card p-3 mb-3">
-                        <div class="d-flex gap-3">
+                        <!-- карточка 1 ничего не нажато -->
+                        <article class="pk-card p-3 mb-3">
+                            <div class="d-flex gap-3">
 
-                            <div class="flex-shrink-0 text-center">
-                                <img class="pk-avatar" src="static/img/avatar-1.png" alt="Аватар автора" width="64" height="64">
-                            </div>
-
-                            <div class="flex-grow-1 pk-card-body">
-                                <h2 class="h5 mb-1">
-                                    <a class="pk-q-title" href="question.html">How to build a moon park?</a>
-                                </h2>
-                                <p class="mb-2">Guys, I have trouble with a moon park. Can't find the black-jack...</p>
-
-                                <div class="d-flex flex-wrap align-items-center gap-2 small">
-                                    <a href="question.html">answers (3)</a>
-                                    <span class="text-muted">Tags:</span>
-                                    <a class="pk-tag" href="index.html">black-jack</a>
-                                    <a class="pk-tag" href="index.html">bender</a>
-                                    <time class="text-muted ms-auto" datetime="2026-10-23T21:00">2 hours ago</time>
+                                <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
+                                    <img class="pk-avatar" src="static/img/avatar-1.png" alt="Аватар автора" width="64" height="64">
+                                    <div class="pk-vote">
+                                        <button class="pk-vote-btn pk-vote-up" type="button" aria-label="Нравится"><span class="material-symbols-outlined">arrow_drop_up</span></button>
+                                        <span class="pk-vote-count">5</span>
+                                        <button class="pk-vote-btn pk-vote-down" type="button" aria-label="Не нравится"><span class="material-symbols-outlined">arrow_drop_down</span></button>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                    </article>
+                                <div class="flex-grow-1 pk-card-body">
+                                    <h2 class="h5 mb-1">
+                                        <a class="pk-q-title" href="question.html">How to build a moon park?</a>
+                                    </h2>
+                                    <p class="mb-2">Guys, I have trouble with a moon park. Can't find the black-jack...</p>
+
+                                    <div class="d-flex flex-wrap align-items-center gap-2 small">
+                                        <a href="question.html">answers (3)</a>
+                                        <span class="text-muted">Tags:</span>
+                                        <a class="pk-tag" href="index.html">black-jack</a>
+                                        <a class="pk-tag" href="index.html">bender</a>
+                                        <time class="text-muted ms-auto" datetime="2026-10-23T21:00">2 hours ago</time>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </article>
+
+                        <!-- карточка 2 нажат лайк -->
+                        <article class="pk-card p-3 mb-3">
+                            <div class="d-flex gap-3">
+
+                                <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
+                                    <img class="pk-avatar" src="static/img/avatar-2.jpg" alt="Аватар автора" width="64" height="64">
+                                    <div class="pk-vote">
+                                        <button class="pk-vote-btn pk-vote-up is-active" type="button" aria-label="Нравится" aria-pressed="true"><span class="material-symbols-outlined">arrow_drop_up</span></button>
+                                        <span class="pk-vote-count">12</span>
+                                        <button class="pk-vote-btn pk-vote-down" type="button" aria-label="Не нравится"><span class="material-symbols-outlined">arrow_drop_down</span></button>
+                                    </div>
+                                </div>
+
+                                <div class="flex-grow-1 pk-card-body">
+                                    <h2 class="h5 mb-1">
+                                        <a class="pk-q-title" href="question.html">Why does my Django migration fail?</a>
+                                    </h2>
+                                    <p class="mb-2">I added a new field to the model and now migrate crashes with an IntegrityError...</p>
+
+                                    <div class="d-flex flex-wrap align-items-center gap-2 small">
+                                        <a href="question.html">answers (7)</a>
+                                        <span class="text-muted">Tags:</span>
+                                        <a class="pk-tag" href="index.html">django</a>
+                                        <a class="pk-tag" href="index.html">python</a>
+                                        <time class="text-muted ms-auto" datetime="2026-10-23T18:30">5 hours ago</time>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </article>
+
+                        <!-- карточка 3 нажат дизлайк -->
+                        <article class="pk-card p-3 mb-3">
+                            <div class="d-flex gap-3">
+
+                                <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
+                                    <img class="pk-avatar" src="static/img/avatar-3.png" alt="Аватар автора" width="64" height="64">
+                                    <div class="pk-vote">
+                                        <button class="pk-vote-btn pk-vote-up" type="button" aria-label="Нравится"><span class="material-symbols-outlined">arrow_drop_up</span></button>
+                                        <span class="pk-vote-count">-2</span>
+                                        <button class="pk-vote-btn pk-vote-down is-active" type="button" aria-label="Не нравится" aria-pressed="true"><span class="material-symbols-outlined">arrow_drop_down</span></button>
+                                    </div>
+                                </div>
+
+                                <div class="flex-grow-1 pk-card-body">
+                                    <h2 class="h5 mb-1">
+                                        <a class="pk-q-title" href="question.html">Is MySQL faster than PostgreSQL?</a>
+                                    </h2>
+                                    <p class="mb-2">Which database should I choose for a small Q&amp;A site? Need simple setup and good speed...</p>
+
+                                    <div class="d-flex flex-wrap align-items-center gap-2 small">
+                                        <a href="question.html">answers (0)</a>
+                                        <span class="text-muted">Tags:</span>
+                                        <a class="pk-tag" href="index.html">MySQL</a>
+                                        <time class="text-muted ms-auto" datetime="2026-10-22T12:00">yesterday</time>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </article>
 
                 </section>
 

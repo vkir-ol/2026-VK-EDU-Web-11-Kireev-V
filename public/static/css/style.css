@@ -116,3 +116,54 @@ a {
 .pk-tag:hover {
     background: #e0e7ff;
 }
+
+/* Виджет лайков */
+.pk-vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.pk-vote-btn {
+    width: 32px;
+    height: 26px;
+    padding: 0;
+    font-size: 0.75rem;
+    line-height: 1;
+    color: var(--pk-muted);
+    background: var(--pk-card);
+    border: 1px solid var(--pk-line);
+    border-radius: 7px;
+}
+
+.pk-vote-btn:hover {
+    color: var(--pk-ink);
+    border-color: var(--pk-muted);
+}
+
+.pk-vote-up.is-active {
+    color: #fff;
+    background: var(--pk-accent);
+    border-color: var(--pk-accent);
+}
+
+.pk-vote-down.is-active {
+    color: #fff;
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.pk-vote-count {
+    font-weight: 600;
+}
+
+
+.pk-vote-btn {
+    height: 28px;
+}
+
+.pk-vote-btn .material-symbols-outlined {
+    display: block;
+    font-size: 28px;
+}
