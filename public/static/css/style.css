@@ -167,3 +167,38 @@ a {
     display: block;
     font-size: 28px;
 }
+
+
+/* Пагинатор */
+.pk-pagination {
+    --bs-pagination-color: var(--pk-ink);
+    --bs-pagination-bg: var(--pk-card);
+    --bs-pagination-border-color: var(--pk-line);
+    --bs-pagination-hover-color: var(--pk-accent-dark);
+    --bs-pagination-hover-bg: #f0fdf4;
+    --bs-pagination-hover-border-color: var(--pk-accent);
+    --bs-pagination-focus-color: var(--pk-accent-dark);
+    --bs-pagination-focus-bg: #f0fdf4;
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(22, 163, 74, 0.25);
+    --bs-pagination-active-bg: var(--pk-accent);
+    --bs-pagination-active-border-color: var(--pk-accent);
+    --bs-pagination-disabled-color: var(--pk-muted);
+    --bs-pagination-disabled-bg: var(--pk-bg);
+    --bs-pagination-disabled-border-color: var(--pk-line);
+    gap: 6px;
+}
+
+.pk-pagination .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    margin-left: 0 !important;
+    border-radius: 8px !important;
+}
+
+.pk-pagination .material-symbols-outlined {
+    font-size: 22px;
+}
