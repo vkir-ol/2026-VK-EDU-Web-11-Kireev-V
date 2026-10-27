@@ -202,3 +202,23 @@ a {
 .pk-pagination .material-symbols-outlined {
     font-size: 22px;
 }
+
+
+
+/* страница вопроса */
+.pk-question-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.pk-avatar-lg {
+    width: 64px;
+    height: 64px;
+}
+
+@media (min-width: 768px) {
+    .pk-avatar-lg {
+        width: 96px;
+        height: 96px;
+    }
+}
