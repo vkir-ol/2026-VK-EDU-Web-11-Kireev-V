@@ -197,6 +197,41 @@
                         </div>
                     </article>
 
+                    <!-- Форма ответа -->
+                    <nav class="mt-4" aria-label="Страницы ответов">
+                        <ul class="pagination pk-pagination justify-content-center flex-wrap">
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Предыдущая страница">
+                                    <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                                </span>
+                            </li>
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">1</span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="question.html">2</a></li>
+                            <li class="page-item"><a class="page-link" href="question.html">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="question.html" aria-label="Следующая страница">
+                                    <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="pk-card p-3 p-md-4 mt-4">
+                        <h2 class="h5 mb-3">Your answer</h2>
+                        <form action="#" method="post">
+                            <div class="mb-3">
+                                <label class="visually-hidden" for="answer-text">Текст ответа</label>
+                                <textarea class="form-control" id="answer-text" name="text" rows="5" maxlength="2000" placeholder="Enter your answer here..." required></textarea>
+                                <div class="form-text">Не более 2000 символов.</div>
+                            </div>
+                            <div class="d-grid d-sm-block">
+                                <button class="btn btn-ask px-4" type="submit">Answer</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </section>
 
 

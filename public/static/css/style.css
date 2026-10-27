@@ -249,3 +249,10 @@ a {
     color: var(--pk-accent-dark);
     font-weight: 600;
 }
+
+
+/* поля форм - зелёная подсветка при фокусе */
+.form-control:focus {
+    border-color: var(--pk-accent);
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
+}
