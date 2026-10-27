@@ -256,3 +256,20 @@ a {
     border-color: var(--pk-accent);
     box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
 }
+
+
+/*узкие формы регистрации и входа*/
+.pk-form-narrow {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-check-input:checked {
+    background-color: var(--pk-accent);
+    border-color: var(--pk-accent);
+}
+
+.form-check-input:focus {
+    border-color: var(--pk-accent);
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
+}
