@@ -222,3 +222,30 @@ a {
         height: 96px;
     }
 }
+
+
+
+/* ответы и виджет - правильный ответ */
+.pk-answer-correct {
+    border-color: var(--pk-accent);
+    box-shadow: inset 4px 0 0 var(--pk-accent);
+}
+
+.pk-correct .form-check-input {
+    cursor: pointer;
+}
+
+.pk-correct .form-check-input:checked {
+    background-color: var(--pk-accent);
+    border-color: var(--pk-accent);
+}
+
+.pk-correct .form-check-input:focus {
+    border-color: var(--pk-accent);
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
+}
+
+.pk-correct .form-check-input:checked + .form-check-label {
+    color: var(--pk-accent-dark);
+    font-weight: 600;
+}
