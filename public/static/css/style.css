@@ -1,0 +1,287 @@
+:root {
+    --pk-bg: #fbf8f2;
+    --pk-ink: #1f2a37;
+    --pk-muted: #6b7280;
+    --pk-accent: #16a34a;
+    --pk-accent-dark: #15803d;
+    --pk-line: #e5dfd3;
+    --pk-card: #ffffff;
+}
+
+body {
+    background-color: var(--pk-bg);
+    color: var(--pk-ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+
+}
+
+a {
+    color: #1d4ed8;
+}
+
+
+/* Шапка */
+.pk-header {
+    background: var(--pk-card);
+    border-bottom: 1px solid var(--pk-line);
+}
+
+.pk-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing : -0.02em;
+    color: var(--pk-ink);
+    text-decoration: none;
+}
+
+.pk-logo:hover {
+    color: var(--pk-accent-dark);
+}
+
+
+.btn-ask {
+    background: var(--pk-accent);
+    border-color: var(--pk-accent);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.btn-ask:hover {
+    background: var(--pk-accent-dark);
+    border-color: var(--pk-accent-dark);
+    color: #fff;
+}
+
+
+/* сайдбар */
+.pk-side-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+
+/* футэр */
+.pk-footer {
+    border-top: 1px solid var(--pk-line);
+    background: var(--pk-card);
+    color: var(--pk-muted);
+}
+
+
+/* Юзерблок */
+.pk-avatar {
+    border-radius: 50%;
+    object-fit: cover;                  /* Без искажения */
+    border: 2px solid var(--pk-line);
+}
+
+.pk-user-name {
+    font-weight: 600;
+    color: var(--pk-ink);
+}
+
+
+/* Карточка вопроса */
+.pk-card {
+    background: var(--pk-card);
+    border: 1px solid var(--pk-line);
+    border-radius: 12px;
+}
+
+.pk-card-body {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.pk-q-title {
+    color: var(--pk-ink);
+    text-decoration: none;
+}
+
+.pk-q-title:hover {
+    color: var(--pk-accent-dark);
+    text-decoration: underline;
+}
+
+.pk-tag {
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 2px 10px;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.pk-tag:hover {
+    background: #e0e7ff;
+}
+
+/* Виджет лайков */
+.pk-vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.pk-vote-btn {
+    width: 32px;
+    height: 26px;
+    padding: 0;
+    font-size: 0.75rem;
+    line-height: 1;
+    color: var(--pk-muted);
+    background: var(--pk-card);
+    border: 1px solid var(--pk-line);
+    border-radius: 7px;
+}
+
+.pk-vote-btn:hover {
+    color: var(--pk-ink);
+    border-color: var(--pk-muted);
+}
+
+.pk-vote-up.is-active {
+    color: #fff;
+    background: var(--pk-accent);
+    border-color: var(--pk-accent);
+}
+
+.pk-vote-down.is-active {
+    color: #fff;
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.pk-vote-count {
+    font-weight: 600;
+}
+
+
+.pk-vote-btn {
+    height: 28px;
+}
+
+.pk-vote-btn .material-symbols-outlined {
+    display: block;
+    font-size: 28px;
+}
+
+
+/* Пагинатор */
+.pk-pagination {
+    --bs-pagination-color: var(--pk-ink);
+    --bs-pagination-bg: var(--pk-card);
+    --bs-pagination-border-color: var(--pk-line);
+    --bs-pagination-hover-color: var(--pk-accent-dark);
+    --bs-pagination-hover-bg: #f0fdf4;
+    --bs-pagination-hover-border-color: var(--pk-accent);
+    --bs-pagination-focus-color: var(--pk-accent-dark);
+    --bs-pagination-focus-bg: #f0fdf4;
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(22, 163, 74, 0.25);
+    --bs-pagination-active-bg: var(--pk-accent);
+    --bs-pagination-active-border-color: var(--pk-accent);
+    --bs-pagination-disabled-color: var(--pk-muted);
+    --bs-pagination-disabled-bg: var(--pk-bg);
+    --bs-pagination-disabled-border-color: var(--pk-line);
+    gap: 6px;
+}
+
+.pk-pagination .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    margin-left: 0 !important;
+    border-radius: 8px !important;
+}
+
+.pk-pagination .material-symbols-outlined {
+    font-size: 22px;
+}
+
+
+
+/* страница вопроса */
+.pk-question-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.pk-avatar-lg {
+    width: 64px;
+    height: 64px;
+}
+
+@media (min-width: 768px) {
+    .pk-avatar-lg {
+        width: 96px;
+        height: 96px;
+    }
+}
+
+
+
+/* ответы и виджет - правильный ответ */
+.pk-answer-correct {
+    border-color: var(--pk-accent);
+    box-shadow: inset 4px 0 0 var(--pk-accent);
+}
+
+.pk-correct .form-check-input {
+    cursor: pointer;
+}
+
+.pk-correct .form-check-input:checked {
+    background-color: var(--pk-accent);
+    border-color: var(--pk-accent);
+}
+
+.pk-correct .form-check-input:focus {
+    border-color: var(--pk-accent);
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
+}
+
+.pk-correct .form-check-input:checked + .form-check-label {
+    color: var(--pk-accent-dark);
+    font-weight: 600;
+}
+
+
+/* поля форм - зелёная подсветка при фокусе */
+.form-control:focus {
+    border-color: var(--pk-accent);
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
+}
+
+
+/*узкие формы регистрации и входа*/
+.pk-form-narrow {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-check-input:checked {
+    background-color: var(--pk-accent);
+    border-color: var(--pk-accent);
+}
+
+.form-check-input:focus {
+    border-color: var(--pk-accent);
+    box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.25);
+}
+
+
+/* Профиль */
+.pk-avatar-xl {
+    width: 112px;
+    height: 112px;
+}
+
+.form-control[readonly] {
+    background-color: var(--pk-bg);
+    color: var(--pk-muted);
+}
