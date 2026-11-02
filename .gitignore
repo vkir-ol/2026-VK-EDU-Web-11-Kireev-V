@@ -218,3 +218,26 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# ОС
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Логи, базы, окружения
+*.log
+*.sqlite3
+db.sqlite3
+.env
+venv/
+.venv/
+
+# Зависимости и артефакты сборки
+node_modules/
+dist/
+build/
