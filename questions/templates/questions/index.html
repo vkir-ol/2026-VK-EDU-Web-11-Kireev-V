@@ -3,6 +3,10 @@
 {% block title %}Новые вопросы — AskPupkin{% endblock %}
 
 {% block content %}
-    <h1 class="h3">New Questions</h1>
-    <p>Здесь будет список новых вопросов</p>
+    <div class="d-flex flex-wrap align-items-baseline gap-3 mb-3">
+        <h1 class="h3 mb-0">New Questions</h1>
+        <a href="{% url 'hot' %}">Hot Questions</a>
+    </div>
+
+    {% include "questions/includes/question_list.html" %}
 {% endblock %}

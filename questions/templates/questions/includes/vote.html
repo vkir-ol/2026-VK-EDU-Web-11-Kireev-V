@@ -1,0 +1,9 @@
+<div class="pk-vote">
+    <button class="pk-vote-btn pk-vote-up{% if vote == 'up' %} is-active{% endif %}" type="button" aria-label="Нравится"{% if vote == 'up' %} aria-pressed="true"{% endif %}>
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_drop_up</span>
+    </button>
+    <span class="pk-vote-count">{{ rating }}</span>
+    <button class="pk-vote-btn pk-vote-down{% if vote == 'down' %} is-active{% endif %}" type="button" aria-label="Не нравится"{% if vote == 'down' %} aria-pressed="true"{% endif %}>
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
+    </button>
+</div>
