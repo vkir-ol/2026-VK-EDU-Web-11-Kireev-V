@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from core.utils import paginate
 
 TAGS = ["python", "django", "football", "MySQL", "perl"]
 
@@ -11,7 +12,7 @@ TITLES = [
 ]
 
 QUESTIONS = []
-for i in range(1, 31):
+for i in range(1, 51):
     QUESTIONS.append({
         "id": i,
         "title": f"{TITLES[i % len(TITLES)]} (#{i})",
@@ -28,16 +29,18 @@ for i in range(1, 31):
 
 
 def index(request):
-    return render(request, "questions/index.html", {"questions": QUESTIONS})
-
+    page = paginate(QUESTIONS, request)
+    return render(request, "questions/index.html", {"page": page})
 
 def hot(request):
     hot_questions = sorted(QUESTIONS, key=lambda q: q["rating"], reverse=True)
-    return render(request, "questions/hot.html", {"questions": hot_questions})
+    page = paginate(hot_questions, request)
+    return render(request, "questions/hot.html", {"page": page})
 
 def tag(request, tag_name):
     tagged = [q for q in QUESTIONS if tag_name in q["tags"]]
-    return render(request, "questions/tag.html", {"tag_name": tag_name, "questions": tagged})
+    page = paginate(tagged, request)
+    return render(request, "questions/tag.html", {"tag_name": tag_name, "page": page})
 
 def question(request, question_id):
     return render(request, "questions/question.html", {"question_id": question_id})
