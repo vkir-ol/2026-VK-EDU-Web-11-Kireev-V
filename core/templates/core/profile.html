@@ -1,8 +1,62 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}Настройки профиля — AskPupkin{% endblock %}
 
 {% block content %}
-    <h1 class="h3">Настройки профиля</h1>
-    <p>Здесь будет форма профиля</p>
+    <h1 class="h3 mb-3">Settings</h1>
+
+    <div class="pk-card p-3 p-md-4">
+
+        <!-- Ошибка формы -->
+        <div class="alert alert-danger" role="alert">
+            Не удалось сохранить изменения. Исправьте ошибки в форме.
+        </div>
+
+        <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-4">
+
+                <!-- Блок с аватаркой -->
+                <div class="col-12 col-md-4 text-center">
+                    <img class="pk-avatar pk-avatar-xl mb-2" src="{% static auth_user.avatar %}" alt="Аватар пользователя {{ auth_user.nickname }}" width="112" height="112">
+                    <div class="fw-semibold">{{ auth_user.nickname }}</div>
+                    <div class="small text-muted mb-3">@{{ auth_user.login }}</div>
+
+                    <label class="form-label small" for="avatar">Новая аватарка</label>
+                    <input class="form-control form-control-sm" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                    <div class="form-text">JPG или PNG, не больше 2 МБ.</div>
+                </div>
+
+                <!-- Поля профиля -->
+                <div class="col-12 col-md-8">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="login">Login</label>
+                        <input class="form-control" type="text" id="login" name="login" value="{{ auth_user.login }}" readonly>
+                        <div class="form-text">Логин изменить нельзя.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control" type="email" id="email" name="email" maxlength="100" value="{{ auth_user.email }}" autocomplete="email" required>
+                        <div class="form-text">На этот адрес будут приходить уведомления об ответах.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="nickname">Nickname</label>
+                        <input class="form-control is-invalid" type="text" id="nickname" name="nickname" maxlength="30" value="Mr. Oleg" required>
+                        <div class="invalid-feedback">Этот ник уже занят.</div>
+                        <div class="form-text">Это имя увидят другие пользователи. Не более 30 символов.</div>
+                    </div>
+
+                    <div class="d-grid d-sm-block">
+                        <button class="btn btn-ask px-4" type="submit">Save</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
 {% endblock %}
