@@ -1,0 +1,62 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}{{ question.title }} — AskPupkin{% endblock %}
+
+{% block content %}
+    <!-- Вопрос -->
+    <article class="pk-card p-3 p-md-4 mb-4">
+        <div class="d-flex gap-3 gap-md-4">
+
+            <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
+                <img class="pk-avatar pk-avatar-lg" src="{% static question.avatar %}" alt="Аватар автора" width="96" height="96">
+                {% include "questions/includes/vote.html" with rating=question.rating vote=question.vote %}
+            </div>
+
+            <div class="flex-grow-1 pk-card-body">
+                <h1 class="h3 mb-2">{{ question.title }}</h1>
+
+                <div class="small text-muted mb-3">
+                    <time>{{ question.created }}</time> · {{ answers_count }} answers
+                </div>
+
+                <p class="pk-question-text mb-3">{{ question.text }}</p>
+
+                <div class="d-flex flex-wrap align-items-center gap-2 small">
+                    <span class="text-muted">Tags:</span>
+                    {% for tag in question.tags %}
+                        <a class="pk-tag" href="{% url 'tag' tag %}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Ответы -->
+    <h2 class="h5 mb-3">{{ answers_count }} Answers</h2>
+
+    {% for answer in page %}
+        {% include "questions/includes/answer_card.html" %}
+    {% empty %}
+        <p class="text-muted">Ответов пока нет</p>
+    {% endfor %}
+
+    {% include "core/includes/pagination.html" %}
+
+    <!-- Форма ответа -->
+    <div class="pk-card p-3 p-md-4 mt-4">
+        <h2 class="h5 mb-3">Your answer</h2>
+        <form action="{% url 'question' question.id %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="visually-hidden" for="answer-text">Текст ответа</label>
+                <textarea class="form-control" id="answer-text" name="text" rows="5" maxlength="2000" placeholder="Enter your answer here..." required></textarea>
+                <div class="form-text">Не более 2000 символов.</div>
+            </div>
+            <div class="d-grid d-sm-block">
+                <button class="btn btn-ask px-4" type="submit">Answer</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

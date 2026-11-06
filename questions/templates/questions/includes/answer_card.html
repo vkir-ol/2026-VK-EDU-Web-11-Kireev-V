@@ -1,0 +1,23 @@
+{% load static %}
+<article class="pk-card p-3 mb-3{% if answer.is_correct %} pk-answer-correct{% endif %}">
+    <div class="d-flex gap-3">
+
+        <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
+            <img class="pk-avatar" src="{% static answer.avatar %}" alt="Аватар автора ответа" width="56" height="56">
+            {% include "questions/includes/vote.html" with rating=answer.rating vote=answer.vote %}
+        </div>
+
+        <div class="flex-grow-1 pk-card-body">
+            <p class="mb-2">{{ answer.text }}</p>
+
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <div class="form-check pk-correct mb-0">
+                    <input class="form-check-input" type="checkbox" id="correct-{{ answer.id }}" {% if answer.is_correct %}checked{% endif %}>
+                    <label class="form-check-label" for="correct-{{ answer.id }}">Correct!</label>
+                </div>
+                <time class="small text-muted">{{ answer.created }}</time>
+            </div>
+        </div>
+
+    </div>
+</article>

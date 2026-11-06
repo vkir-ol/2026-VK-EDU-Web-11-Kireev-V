@@ -1,0 +1,27 @@
+{% load static %}
+<article class="pk-card p-3 mb-3">
+    <div class="d-flex gap-3">
+
+        <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
+            <img class="pk-avatar" src="{% static question.avatar %}" alt="Аватар автора" width="64" height="64">
+            {% include "questions/includes/vote.html" with rating=question.rating vote=question.vote %}
+        </div>
+
+        <div class="flex-grow-1 pk-card-body">
+            <h2 class="h5 mb-1">
+                <a class="pk-q-title" href="{% url 'question' question.id %}">{{ question.title }}</a>
+            </h2>
+            <p class="mb-2">{{ question.text|truncatechars:120 }}</p>
+
+            <div class="d-flex flex-wrap align-items-center gap-2 small">
+                <a href="{% url 'question' question.id %}">answers ({{ question.answers_count }})</a>
+                <span class="text-muted">Tags:</span>
+                {% for tag in question.tags %}
+                    <a class="pk-tag" href="{% url 'tag' tag %}">{{ tag }}</a>
+                {% endfor %}
+                <time class="text-muted ms-auto">{{ question.created }}</time>
+            </div>
+        </div>
+
+    </div>
+</article>

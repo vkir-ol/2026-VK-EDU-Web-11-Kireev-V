@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+
+{% block title %}Регистрация — AskPupkin{% endblock %}
+
+{% block content %}
+    <div class="pk-card pk-form-narrow p-3 p-md-4 mx-auto">
+
+        <h1 class="h3 mb-3">Register</h1>
+
+        <!-- Ошибка формы -->
+        <div class="alert alert-danger" role="alert">
+            Не удалось зарегистрироваться. Исправьте ошибки в форме.
+        </div>
+
+        <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label" for="login">Login</label>
+                <input class="form-control" type="text" id="login" name="login" maxlength="30" value="dr_pepper" autocomplete="username" required>
+                <div class="form-text">От 3 до 30 символов: латинские буквы, цифры и «_».</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control is-invalid" type="email" id="email" name="email" maxlength="100" value="dr.pepper@mail" autocomplete="email" required>
+                <div class="invalid-feedback">Вы ввели невалидный email.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="nickname">Nickname</label>
+                <input class="form-control" type="text" id="nickname" name="nickname" maxlength="30" value="Dr. Pepper" required>
+                <div class="form-text">Это имя увидят другие пользователи. Не более 30 символов.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="password" minlength="8" maxlength="64" autocomplete="new-password" required>
+                <div class="form-text">Не менее 8 символов.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="password2">Repeat password</label>
+                <input class="form-control is-invalid" type="password" id="password2" name="password2" minlength="8" maxlength="64" autocomplete="new-password" required>
+                <div class="invalid-feedback">Пароли не совпадают.</div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label" for="avatar">Avatar</label>
+                <input class="form-control" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                <div class="form-text">JPG или PNG, не больше 2 МБ.</div>
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-ask" type="submit">Register</button>
+            </div>
+
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+        </p>
+
+    </div>
+{% endblock %}
