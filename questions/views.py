@@ -5,11 +5,18 @@ from core.utils import paginate
 TAGS = ["python", "django", "football", "MySQL", "perl"]
 
 TITLES = [
-    "How to play football like Cristiano Ronaldo?",
-    "Why does my Django migration fail?",
-    "Is MySQL faster than PostgreSQL?",
-    "How to center a div with Bootstrap?",
-    "What is the best way to learn Python?",
+    "Как играть в футбол как Криштиану Роналду?",
+    "Почему падает миграция в Django?",
+    "MySQL быстрее, чем PostgreSQL?",
+    "Как отцентрировать блок в Bootstrap?",
+    "Как лучше всего выучить Python?",
+]
+
+AVATARS = [
+    "core/img/avatar-1.png",
+    "core/img/avatar-2.jpg",
+    "core/img/avatar-3.png",
+    "core/img/avatar-4.jpg",
 ]
 
 QUESTIONS = []
@@ -17,14 +24,13 @@ for i in range(1, 51):
     QUESTIONS.append({
         "id": i,
         "title": f"{TITLES[i % len(TITLES)]} (#{i})",
-        "text": f"Question text {i}. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, "
-                f"sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+        "text": f"Текст вопроса {i}. Здесь подробно описана проблема: что уже пробовал и что не получилось.",
         "tags": [TAGS[i % len(TAGS)], TAGS[(i + 2) % len(TAGS)]],
         "answers_count": 5 + i % 10,
         "rating": i * 7 % 25 - 5,
         "vote": [None, "up", "down"][i % 3],
-        "avatar": f"core/img/avatar-{i % 3 + 1}.png",
-        "created": f"{i} hours ago",
+        "avatar": AVATARS[i % len(AVATARS)],
+        "created": f"{i} ч. назад",
     })
 
 
@@ -44,20 +50,24 @@ def tag(request, tag_name):
     return render(request, "questions/tag.html", {"tag_name": tag_name, "page": page})
 
 def question(request, question_id):
-    if question_id < 1 or question_id > len(QUESTIONS):
-        raise Http404("Вопрос не найден")
+    question = None
+    for q in QUESTIONS:
+        if q["id"] == question_id:
+            question = q
+            break
 
-    question = QUESTIONS[question_id - 1]
+    if question is None:
+        raise Http404("Вопрос не найден")
 
     answers = []
     for i in range(1, question["answers_count"] + 1):
         answers.append({
             "id": i,
-            "text": f"Answer {i}. First of all I would like to thank you for the invitation to participate in such a great discussion. Lorem ipsum dolor sit amet.",
+            "text": f"Ответ {i}. Спасибо за вопрос! Попробуй начать с простого и разобраться по шагам.",
             "rating": 10 - i,
             "vote": "up" if i == 1 else None,
-            "avatar": f"core/img/avatar-{i % 3 + 1}.png",
-            "created": f"{i * 10} minutes ago",
+            "avatar": AVATARS[i % len(AVATARS)],
+            "created": f"{i * 10} мин. назад",
             "is_correct": i == 1,
         })
 

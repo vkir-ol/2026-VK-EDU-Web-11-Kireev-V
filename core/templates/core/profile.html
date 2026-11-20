@@ -4,7 +4,7 @@
 {% block title %}Настройки профиля — AskPupkin{% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-3">Settings</h1>
+    <h1 class="h3 mb-3">Настройки профиля</h1>
 
     <div class="pk-card p-3 p-md-4">
 
@@ -32,26 +32,22 @@
                 <div class="col-12 col-md-8">
 
                     <div class="mb-3">
-                        <label class="form-label" for="login">Login</label>
+                        <label class="form-label" for="login">Логин</label>
                         <input class="form-control" type="text" id="login" name="login" value="{{ auth_user.login }}" readonly>
                         <div class="form-text">Логин изменить нельзя.</div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="email">Email</label>
-                        <input class="form-control" type="email" id="email" name="email" maxlength="100" value="{{ auth_user.email }}" autocomplete="email" required>
-                        <div class="form-text">На этот адрес будут приходить уведомления об ответах.</div>
-                    </div>
+                    {% include "core/includes/email_field.html" with value=auth_user.email help="На этот адрес будут приходить уведомления об ответах." %}
 
                     <div class="mb-4">
-                        <label class="form-label" for="nickname">Nickname</label>
+                        <label class="form-label" for="nickname">Никнейм</label>
                         <input class="form-control is-invalid" type="text" id="nickname" name="nickname" maxlength="30" value="Mr. Oleg" required>
                         <div class="invalid-feedback">Этот ник уже занят.</div>
                         <div class="form-text">Это имя увидят другие пользователи. Не более 30 символов.</div>
                     </div>
 
                     <div class="d-grid d-sm-block">
-                        <button class="btn btn-ask px-4" type="submit">Save</button>
+                        <button class="btn btn-ask px-4" type="submit">Сохранить</button>
                     </div>
 
                 </div>

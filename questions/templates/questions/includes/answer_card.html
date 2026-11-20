@@ -13,7 +13,7 @@
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
                 <div class="form-check pk-correct mb-0">
                     <input class="form-check-input" type="checkbox" id="correct-{{ answer.id }}" {% if answer.is_correct %}checked{% endif %}>
-                    <label class="form-check-label" for="correct-{{ answer.id }}">Correct!</label>
+                    <label class="form-check-label" for="correct-{{ answer.id }}">Правильный ответ</label>
                 </div>
                 <time class="small text-muted">{{ answer.created }}</time>
             </div>
