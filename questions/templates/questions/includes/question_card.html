@@ -3,20 +3,20 @@
     <div class="d-flex gap-3">
 
         <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
-            <img class="pk-avatar" src="{% static question.avatar %}" alt="Аватар автора" width="64" height="64">
-            {% include "questions/includes/vote.html" with rating=question.rating vote=question.vote %}
+            <img class="pk-avatar" src="{% if question.author.profile.avatar %}{{ question.author.profile.avatar.url }}{% else %}{% static 'core/img/avatar-1.png' %}{% endif %}" alt="Аватар автора" width="64" height="64">
+            {% include "questions/includes/vote.html" with rating=question.rating %}
         </div>
 
         <div class="flex-grow-1 pk-card-body">
             <h2 class="h5 mb-1">
-                <a class="pk-q-title" href="{% url 'question' question.id %}">{{ question.title }}</a>
+                <a class="pk-q-title" href="{{ question.get_absolute_url }}">{{ question.title }}</a>
             </h2>
             <p class="mb-2">{{ question.text|truncatechars:120 }}</p>
 
             <div class="d-flex flex-wrap align-items-center gap-2 small">
                 <a href="{% url 'question' question.id %}">ответов: ({{ question.answers_count }})</a>
-                {% include "questions/includes/tags.html" with tags=question.tags %}
-                <time class="text-muted ms-auto">{{ question.created }}</time>
+                {% include "questions/includes/tags.html" with tags=question.tags.all %}
+                <time class="text-muted ms-auto">{{ question.created_at|date:"d.m.Y H:i" }}</time>
             </div>
         </div>
 

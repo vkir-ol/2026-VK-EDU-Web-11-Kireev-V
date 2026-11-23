@@ -14,4 +14,5 @@ def paginate(objects_list, request, per_page=10):
         # если такой страницы нет - показываем последнюю
         page = paginator.page(paginator.num_pages)
 
+    page.elided_range = paginator.get_elided_page_range(page.number)
     return page

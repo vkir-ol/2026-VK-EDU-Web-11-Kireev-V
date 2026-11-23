@@ -1,7 +1,7 @@
 {% for question in page %}
     {% include "questions/includes/question_card.html" %}
 {% empty %}
-    <p class="text-muted">Вопросов пока нет</p>
+    <p class="text-muted">Пока нет ни одного вопроса</p>
 {% endfor %}
 
 {% include "core/includes/pagination.html" %}

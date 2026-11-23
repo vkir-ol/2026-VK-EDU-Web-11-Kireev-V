@@ -9,21 +9,21 @@
         <div class="d-flex gap-3 gap-md-4">
 
             <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
-                <img class="pk-avatar pk-avatar-lg" src="{% static question.avatar %}" alt="Аватар автора" width="96" height="96">
-                {% include "questions/includes/vote.html" with rating=question.rating vote=question.vote %}
+                <img class="pk-avatar pk-avatar-lg" src="{% if question.author.profile.avatar %}{{ question.author.profile.avatar.url }}{% else %}{% static 'core/img/avatar-1.png' %}{% endif %}" alt="Аватар автора" width="96" height="96">
+                {% include "questions/includes/vote.html" with rating=question.rating %}
             </div>
 
             <div class="flex-grow-1 pk-card-body">
                 <h1 class="h3 mb-2">{{ question.title }}</h1>
 
                 <div class="small text-muted mb-3">
-                    <time>{{ question.created }}</time> · ответов: {{ answers_count }}
+                    <time datetime="{{ question.created_at|date:'c' }}">{{ question.created_at|date:"d.m.Y H:i" }}</time> · ответов: {{ page.paginator.count }}
                 </div>
 
                 <p class="pk-question-text mb-3">{{ question.text }}</p>
 
                 <div class="d-flex flex-wrap align-items-center gap-2 small">
-                    {% include "questions/includes/tags.html" with tags=question.tags %}
+                    {% include "questions/includes/tags.html" with tags=question.tags.all %}
                 </div>
             </div>
 
@@ -31,12 +31,12 @@
     </article>
 
     <!-- Ответы -->
-    <h2 class="h5 mb-3">Ответы: {{ answers_count }}</h2>
+    <h2 class="h5 mb-3">Ответы: {{ page.paginator.count }}</h2>
 
     {% for answer in page %}
         {% include "questions/includes/answer_card.html" %}
     {% empty %}
-        <p class="text-muted">Ответов пока нет</p>
+        <p class="text-muted">Пока нет ни одного ответа к этому вопросу</p>
     {% endfor %}
 
     {% include "core/includes/pagination.html" %}
@@ -44,7 +44,7 @@
     <!-- Форма ответа -->
     <div class="pk-card p-3 p-md-4 mt-4">
         <h2 class="h5 mb-3">Ваш ответ</h2>
-        <form action="{% url 'question' question.id %}" method="post">
+        <form action="{{ question.get_absolute_url }}" method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label class="visually-hidden" for="answer-text">Текст ответа</label>
@@ -52,7 +52,7 @@
                 <div class="form-text">Не более 2000 символов.</div>
             </div>
             <div class="d-grid d-sm-block">
-                <button class="btn btn-ask px-4" type="submit">Ответить</button>
+                <button class="btn btn-ask px-4" type="submit" disabled>Ответить</button>
             </div>
         </form>
     </div>

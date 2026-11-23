@@ -1,8 +1,5 @@
-from .views import TAGS
+from .models import Tag
 
 
 def sidebar(request):
-    return {
-        "popular_tags": TAGS,
-        "best_members": ["Mr. Oleg", "Mr. Mentalist", "Gogy"],
-    }
+    return {'popular_tags': Tag.objects.popular()}
