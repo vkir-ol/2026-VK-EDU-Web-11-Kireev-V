@@ -1,0 +1,6 @@
+{% if tags %}
+    <span class="text-muted">Теги:</span>
+    {% for tag in tags %}
+        <a class="pk-tag" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+    {% endfor %}
+{% endif %}

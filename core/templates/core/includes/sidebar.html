@@ -1,17 +1,8 @@
 <section class="mb-4">
-    <h2 class="pk-side-title">Popular Tags</h2>
-    <a href="{% url 'tag' 'perl' %}">perl</a>
-    <a href="{% url 'tag' 'python' %}">python</a>
-    <a href="{% url 'tag' 'MySQL' %}">MySQL</a>
-    <a href="{% url 'tag' 'django' %}">django</a>
-    <a href="{% url 'tag' 'football' %}">football</a>
-</section>
-
-<section>
-    <h2 class="pk-side-title">Best Members</h2>
-    <ul class="list-unstyled">
-        <li><a href="{% url 'profile' %}">Mr. Oleg</a></li>
-        <li><a href="{% url 'profile' %}">Mr. Mentalist</a></li>
-        <li><a href="{% url 'profile' %}">Gogy</a></li>
-    </ul>
+    <h2 class="pk-side-title">Популярные теги</h2>
+    {% for tag in popular_tags %}
+        <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+    {% empty %}
+        <p class="text-muted">Пока нет популярных тегов</p>
+    {% endfor %}
 </section>

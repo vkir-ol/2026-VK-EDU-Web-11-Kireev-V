@@ -1,10 +1,50 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from django.db.models import Count, OuterRef, Subquery, Sum, Value
+from django.db.models.functions import Coalesce
+from django.urls import reverse
+
+def related_total(queryset, foreign_key, aggregate):
+    totals = queryset.filter(**{foreign_key: OuterRef('pk')}).order_by()
+    totals = totals.values(foreign_key).annotate(total=aggregate).values('total')
+    return Coalesce(Subquery(totals), Value(0), output_field=models.IntegerField())
 
 
+class TagManager(models.Manager):
+    def popular(self):
+        return self.annotate(question_count=Count('questions')).filter(
+            question_count__gt=0,
+        ).order_by('-question_count', 'name')[:5]
+
+
+class QuestionManager(models.Manager):
+    def for_display(self):
+        return self.select_related('author__profile').prefetch_related('tags').annotate(
+            rating=related_total(QuestionLike.objects, 'question_id', Sum('value')),
+        )
+
+    def newest(self):
+        return self.for_display().annotate(
+            answers_count=related_total(Answer.objects, 'question_id', Count('*')),
+        ).order_by('-created_at', '-pk')
+
+    def best(self):
+        return self.newest().order_by('-rating', '-created_at', '-pk')
+
+    def by_tag(self, tag):
+        return self.newest().filter(tags=tag)
+
+
+class AnswerManager(models.Manager):
+    def for_question(self, question):
+        return self.filter(question=question).select_related('author__profile').annotate(
+            rating=related_total(AnswerLike.objects, 'answer_id', Sum('value')),
+        ).order_by('-is_correct', 'created_at', 'pk')
+ 
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name='Название')
+    objects = TagManager()
 
     class Meta:
         verbose_name = 'Тег'
@@ -12,6 +52,9 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('tag', args=[self.name])
 
 
 class Question(models.Model):
@@ -24,7 +67,7 @@ class Question(models.Model):
     title = models.CharField(max_length=120, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     tags = models.ManyToManyField(Tag, related_name='questions', blank=True, verbose_name='Теги')
-    rating = models.IntegerField(default=0, db_index=True, verbose_name='Рейтинг')
+    objects = QuestionManager()
     created_at = models.DateTimeField(default=timezone.now, db_index=True, verbose_name='Дата создания')
 
     class Meta:
@@ -33,6 +76,9 @@ class Question(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('question', args=[self.pk])
 
 
 class Answer(models.Model):
@@ -50,7 +96,7 @@ class Answer(models.Model):
     )
     text = models.TextField(verbose_name='Текст')
     is_correct = models.BooleanField(default=False, verbose_name='Правильный ответ')
-    rating = models.IntegerField(default=0, verbose_name='Рейтинг')
+    objects = AnswerManager()
     created_at = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
 
     class Meta:
