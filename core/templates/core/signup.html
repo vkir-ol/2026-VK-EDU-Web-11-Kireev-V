@@ -7,42 +7,33 @@
 
         <h1 class="h3 mb-3">Регистрация</h1>
 
-        <!-- Ошибка формы -->
-        <div class="alert alert-danger" role="alert">
-            Не удалось зарегистрироваться. Исправьте ошибки в форме.
-        </div>
-
-        <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'signup' %}" method="post">
             {% csrf_token %}
 
-            <div class="mb-3">
-                <label class="form-label" for="login">Логин</label>
-                <input class="form-control" type="text" id="login" name="login" maxlength="30" value="mr_siu" autocomplete="username" required>
-                <div class="form-text">От 3 до 30 символов: латинские буквы, цифры и «_».</div>
-            </div>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
 
-            {% include "core/includes/email_field.html" with value="cantorSiu@mail" error="Вы ввели невалидный email." %}
-
-            <div class="mb-3">
-                <label class="form-label" for="nickname">Никнейм</label>
-                <input class="form-control" type="text" id="nickname" name="nickname" maxlength="30" value="Mr_Siu" required>
-                <div class="form-text">Это имя увидят другие пользователи. Не более 30 символов.</div>
-            </div>
-
-            {% include "core/includes/password_field.html" with id="password" label="Пароль" autocomplete="new-password" help="Не менее 8 символов." %}
-
-            {% include "core/includes/password_field.html" with id="password2" label="Повторите пароль" autocomplete="new-password" error="Пароли не совпадают." %}
-
-            <div class="mb-4">
-                <label class="form-label" for="avatar">Аватар</label>
-                <input class="form-control" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
-                <div class="form-text">JPG или PNG, не больше 2 МБ.</div>
-            </div>
+            {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label d-block" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <div class="form-text">{{ field.help_text }}</div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
             <div class="d-grid">
                 <button class="btn btn-ask" type="submit">Зарегистрироваться</button>
             </div>
-
         </form>
 
         <p class="text-center mt-3 mb-0">

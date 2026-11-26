@@ -1,9 +1,15 @@
-<div class="pk-vote">
-    <button class="pk-vote-btn pk-vote-up" type="button" aria-label="Нравится" disabled>
+<form class="pk-vote" method="post" action="{% url vote_url object_id %}"
+      {% if not user.is_authenticated %}title="Войдите, чтобы голосовать"{% endif %}>
+    {% csrf_token %}
+    <button class="pk-vote-btn pk-vote-up" type="submit" name="value" value="1"
+            aria-label="Нравится" {% if not user.is_authenticated %}disabled{% endif %}>
         <span class="material-symbols-outlined" aria-hidden="true">arrow_drop_up</span>
     </button>
-    <span class="pk-vote-count">{{ rating }}</span>
-    <button class="pk-vote-btn pk-vote-down" type="button" aria-label="Не нравится" disabled>
+
+    <span class="pk-vote-count" aria-live="polite">{{ rating }}</span>
+
+    <button class="pk-vote-btn pk-vote-down" type="submit" name="value" value="-1"
+            aria-label="Не нравится" {% if not user.is_authenticated %}disabled{% endif %}>
         <span class="material-symbols-outlined" aria-hidden="true">arrow_drop_down</span>
     </button>
-</div>
+</form>

@@ -1,5 +1,5 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
+from django.core.paginator import InvalidPage, Paginator
+from django.http import Http404
 
 def paginate(objects_list, request, per_page=10):
     paginator = Paginator(objects_list, per_page)
@@ -7,12 +7,8 @@ def paginate(objects_list, request, per_page=10):
 
     try:
         page = paginator.page(page_number)
-    except PageNotAnInteger:
-        # если в page не число - показываем первую страницу
-        page = paginator.page(1)
-    except EmptyPage:
-        # если такой страницы нет - показываем последнюю
-        page = paginator.page(paginator.num_pages)
+    except InvalidPage as exc:
+        raise Http404('Страница не найдена') from exc
 
     page.elided_range = paginator.get_elided_page_range(page.number)
     return page

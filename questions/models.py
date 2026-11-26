@@ -33,7 +33,7 @@ class QuestionManager(models.Manager):
         return self.newest().order_by('-rating', '-created_at', '-pk')
 
     def by_tag(self, tag):
-        return self.newest().filter(tags=tag)
+        return self.best().filter(tags=tag)
 
 
 class AnswerManager(models.Manager):
@@ -41,7 +41,7 @@ class AnswerManager(models.Manager):
         return self.filter(question=question).select_related('author__profile').annotate(
             rating=related_total(AnswerLike.objects, 'answer_id', Sum('value')),
         ).order_by('-is_correct', 'created_at', 'pk')
- 
+
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name='Название')
     objects = TagManager()
@@ -82,6 +82,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    PAGE_SIZE = 30
     question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
@@ -102,9 +103,30 @@ class Answer(models.Model):
     class Meta:
         verbose_name = 'Ответ'
         verbose_name_plural = 'Ответы'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['question'],
+                condition=models.Q(is_correct=True),
+                name='one_correct_answer_per_question',
+                violation_error_message='У этого вопроса уже есть правильный ответ.',
+            ),
+        ]
 
     def __str__(self):
         return f'Ответ #{self.id} к вопросу #{self.question_id}'
+
+    def get_absolute_url(self):
+        earlier = models.Q(created_at__lt=self.created_at) | models.Q(
+            created_at=self.created_at,
+            pk__lt=self.pk,
+        )
+        before = models.Q(is_correct=self.is_correct) & earlier
+        if not self.is_correct:
+            before |= models.Q(is_correct=True)
+
+        position = Answer.objects.filter(question_id=self.question_id).filter(before).count()
+        page_number = position // self.PAGE_SIZE + 1
+        return f'{self.question.get_absolute_url()}?page={page_number}#answer-{self.pk}'
 
 
 LIKE_CHOICES = [

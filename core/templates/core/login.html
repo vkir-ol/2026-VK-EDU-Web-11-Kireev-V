@@ -7,27 +7,29 @@
 
         <h1 class="h3 mb-3">Вход</h1>
 
-        <!-- Ошибка формы -->
-        <div class="alert alert-danger" role="alert">
-            Вы ввели неправильный email или пароль.
-        </div>
-
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
 
-            {% include "core/includes/email_field.html" with value="cantorSiu@mail.ru" error="Вы ввели невалидный email." %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
 
-            {% include "core/includes/password_field.html" with id="password" label="Пароль" autocomplete="current-password" help="Пароль чувствителен к регистру букв." %}
-
-            <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" id="remember" name="remember">
-                <label class="form-check-label" for="remember">Запомнить меня</label>
+            <div class="mb-3">
+                <label for="{{ form.username.id_for_label }}">Логин</label>
+                {{ form.username }}
+                {{ form.username.errors }}
             </div>
 
-            <div class="d-grid">
-                <button class="btn btn-ask" type="submit">Войти</button>
+            <div class="mb-3">
+                <label for="{{ form.password.id_for_label }}">Пароль</label>
+                {{ form.password }}
+                {{ form.password.errors }}
             </div>
 
+            <button class="btn btn-ask" type="submit">Войти</button>
         </form>
 
         <p class="text-center mt-3 mb-0">

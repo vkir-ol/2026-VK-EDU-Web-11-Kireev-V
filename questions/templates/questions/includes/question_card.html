@@ -4,7 +4,7 @@
 
         <div class="flex-shrink-0 d-flex flex-column align-items-center gap-2">
             <img class="pk-avatar" src="{% if question.author.profile.avatar %}{{ question.author.profile.avatar.url }}{% else %}{% static 'core/img/avatar-1.png' %}{% endif %}" alt="Аватар автора" width="64" height="64">
-            {% include "questions/includes/vote.html" with rating=question.rating %}
+            {% include "questions/includes/vote.html" with rating=question.rating vote_url="question_vote" object_id=question.pk %}
         </div>
 
         <div class="flex-grow-1 pk-card-body">
