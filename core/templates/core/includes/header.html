@@ -1,0 +1,50 @@
+{% load static %}
+<header class="pk-header py-3">
+    <div class="container">
+        <div class="row align-items-center g-3">
+
+            <div class="col-auto">
+                <a class="pk-logo" href="{% url 'index' %}">AskPupkin</a>
+            </div>
+
+            <div class="col-12 col-md order-3 order-md-2">
+                <form class="d-flex" role="search" action="{% url 'index' %}" method="get">
+                    <input class="form-control" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
+                </form>
+            </div>
+
+            <div class="col-auto order-2 order-md-3">
+                {% if user.is_authenticated %}
+                    <a class="btn btn-ask" href="{% url 'ask' %}">Задать вопрос</a>
+                {% else %}
+                    <span class="d-inline-block" tabindex="0" title="Войдите, чтобы задать вопрос">
+                        <button class="btn btn-ask" type="button" disabled>Задать вопрос</button>
+                    </span>
+                {% endif %}
+            </div>
+
+            <div class="col-auto ms-auto order-2 order-md-4">
+                {% if user.is_authenticated %}
+                    <!-- авторизованный пользователь -->
+                    <div class="d-flex align-items-center gap-2">
+                        <img class="pk-avatar" src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'core/img/avatar-1.png' %}{% endif %}" alt="Аватар {{ user.profile.nickname|default:user.username }}" width="40" height="40">
+                        <div class="lh-sm">
+                            <div class="pk-user-name">{{ user.profile.nickname|default:user.username }}</div>
+                            <a class="small" href="{% url 'profile' %}">настройки</a>
+                            <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                <button type="submit" class="btn btn-link btn-sm p-0 ms-2">выйти</button>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- неавторизованный пользователь -->
+                    <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">войти</a>
+                    <a class="ms-2" href="{% url 'signup' %}">Зарегистрироваться</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</header>
